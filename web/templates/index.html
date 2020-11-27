@@ -30,7 +30,8 @@
     }
 
     .img-col{
-      min-height: 400px;
+      /* height: 100%; */
+      min-height: 370px;
     }
 
     #map{
@@ -90,27 +91,23 @@
         </div>
       </nav>
 
-      <div class="container-fluid">
+      <div class="container-fluid vh-100">
         <div class="row">
-          <div class="col">
-            <div class="row video-row">
-              <div class="col img-col">
-                <div class="" id="map"></div>
-              </div>
-              <div class="col img-col">
-                <img src="{{ url_for('video_feed') }}" height="auto" width="100%" alt="RAW STREAM">
-              </div>
-              <div class="w-100"></div>
-              <div class="col img-col">
-                <img src="{{ url_for('video_overlay') }}" height="auto" width="100%" alt="OVERLAY STREAM">
-              </div>
-              <div class="col img-col">
-                <!-- <video id="videoPlayer" loop muted="muted" height="auto" width="100%" autoplay>
-                  <source src="/video_feed" type="video/mp4">
-                </video> -->
-                <!-- <img src="{{ url_for('video_feed') }}" height="auto" width="100%"> -->
-              </div>
-            </div>
+          <div class="col img-col">
+            <div class="" id="map"></div>
+          </div>
+          <div class="col img-col">
+            <img src="{{ url_for('video_feed') }}" height="auto" width="100%" alt="RAW STREAM">
+          </div>
+          <div class="w-100"></div>
+          <div class="col img-col">
+            <img src="{{ url_for('video_overlay') }}" height="auto" width="100%" alt="OVERLAY STREAM">
+          </div>
+          <div class="col img-col">
+            <!-- <video id="videoPlayer" loop muted="muted" height="auto" width="100%" autoplay>
+              <source src="/video_feed" type="video/mp4">
+            </video> -->
+            <!-- <img src="{{ url_for('video_feed') }}" height="auto" width="100%"> -->
           </div>
         </div>
       </div>
