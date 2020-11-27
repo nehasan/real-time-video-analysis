@@ -265,7 +265,7 @@ def geny():
     colors= np.random.uniform(0,255,size=(len(classes),3))
 
     #loading image
-    cap=cv2.VideoCapture('./data/video/V1.mp4') #0 for 1st webcam
+    cap=cv2.VideoCapture('./data/video/cars.mp4') #0 for 1st webcam
 
     font = cv2.FONT_HERSHEY_PLAIN
     starting_time= time.time()
@@ -348,17 +348,17 @@ def geny():
 def gen():
     """Video streaming generator function."""
     # videoPafy = pafy.new("https://www.youtube.com/watch?v=1EiC9bvVGnk")
-    # videoPafy = pafy.new("https://youtu.be/y2cFkVfVf2Y?list=RDmjaayCARwro")
+    # videoPafy = pafy.new("https://www.youtube.com/watch?v=WduD-KxmCuE&list=RDWduD-KxmCuE&start_radio=1")
     # video = videoPafy.getbest(preftype="mp4").url
     cap = cv2.VideoCapture('./data/video/cars.mp4')
-    # cap = cv2.VideoCapture(0)
-    print(cap)
+    # cap = cv2.VideoCapture(video)
+    # print(cap)
 
     # Read until video is completed
     while(cap.isOpened()):
       # Capture frame-by-frame
         ret, img = cap.read()
-        print(ret)
+        # print(ret)
         if ret == True:
             img = cv2.resize(img, (0,0), fx=0.3, fy=0.3)
             frame = cv2.imencode('.jpg', img)[1].tobytes()
@@ -369,7 +369,7 @@ def gen():
 
 
 
-@app.route('/video_feed_live')
+@app.route('/video_feed')
 def video_feed():
     """Video streaming route. Put this in the src attribute of an img tag."""
     return Response(gen(),
@@ -388,7 +388,10 @@ def video_deepsort():
     return Response(deepsort(),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
+# from flask_socketio import SocketIO, emit
+# socketio = SocketIO(app)
 
 
 if __name__ == '__main__':
-   app.run(debug=True)
+   app.run(host='127.0.0.1', port='5000', debug=True)
+   # socketio.run(app)
