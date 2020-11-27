@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>UOIT|SURVEILLANCE</title>
+
+  <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="/css/simple-sidebar.css" type="text/css">
+
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="/vendor/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+  <!-- <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script> -->
+  <!-- <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' /> -->
+  <script src='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.js'></script>
+  <link href='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.css' rel='stylesheet' />
+
+  <!-- <link rel="stylesheet" href="/vendor/leaflet/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="">
+  <script src="/vendor/leaflet/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script> -->
+
+  <style media="screen">
+    video::-webkit-media-controls-start-playback-button {
+      display: none;
+    }
+
+    #map{
+      height: 100%;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+      <div class="sidebar-heading">UOIT SURVEILLANCE</div>
+      <div class="list-group list-group-flush">
+        <a href="#" class="list-group-item list-group-item-action bg-light">Dashboard</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">Overview</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">Events</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">Status</a>
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col">
+            <div class="row video-row">
+              <div class="col">
+                <div class="" id="map"></div>
+              </div>
+              <div class="col">
+                <img src="{{ url_for('video_feed') }}" height="auto" width="100%">
+              </div>
+              <div class="w-100"></div>
+              <div class="col">
+                <!-- <img src="{{ url_for('video_feed') }}" height="auto" width="100%"> -->
+              </div>
+              <div class="col">
+                <!-- <video id="videoPlayer" loop muted="muted" height="auto" width="100%" autoplay>
+                  <source src="/video_feed" type="video/mp4">
+                </video> -->
+                <!-- <img src="{{ url_for('video_feed') }}" height="auto" width="100%"> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Menu Toggle Script -->
+  <script type="text/javascript">
+
+    function initMap() {
+      L.mapbox.accessToken = 'pk.eyJ1IjoibmFoaWRoYXNhbmtoYW4iLCJhIjoiY2toeTJmeXZxMGJ1ejMzbzJvaHgxMjJnYSJ9.ZvINpps6cQNEju50nXYVkQ';
+      var map = L.mapbox.map('map')
+        .setView([43.948038, -78.896112], 27)
+        .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
+
+      // Build a marker from a simple GeoJSON object:
+      L.marker([43.948038, -78.896112], {
+          icon: L.mapbox.marker.icon({
+              'marker-size': 'large',
+              'marker-symbol': 'camera',
+              'marker-color': '#fa0'
+          })
+      }).addTo(map);
+
+      map.invalidateSize();
+    }
+
+    // function drawMap(){
+    //   var mymap = L.map('lf-map');
+    //
+    //   L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+    //     maxZoom: 18,
+    //     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+    //       '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+    //       'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    //     id: 'mapbox/streets-v11',
+    //     tileSize: 512,
+    //     zoomOffset: -1
+    //   }).addTo(mymap);
+    // 
+    //   latlng = [43.948038, -78.896112];
+    //   marker = L.marker(latlng);
+    //   marker.bindPopup("Camera").openPopup();
+    //   marker.addTo(mymap)
+    //   mymap.setView(latlng, 14);
+    // }
+
+    $(document).ready(function(){
+      $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+      });
+    })
+
+    // $(window).on('load', drawMap());
+    $(window).on('load', initMap());
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,6 @@
+data/yolov4.weights
+data/video/*
+data/dataset/* 
+checkpoints/*
+yolov4-tiny.weights
+

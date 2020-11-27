@@ -1,0 +1,10 @@
+opencv-python
+lxml
+tqdm
+tensorflow
+absl-py
+easydict
+matplotlib
+pillow
+pafy==0.5.3.1
+youtube-dl==2017.11.15
